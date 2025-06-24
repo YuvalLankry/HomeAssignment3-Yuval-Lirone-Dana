@@ -28,3 +28,57 @@ function checkAvailability(listingId, startDate, endDate) {
   //      - שימוש ב-isDateRangeOverlap להשוואה בין טווחים
   // להחזיר false אם יש חפיפה, true אם פנוי
 }
+
+
+    const listingId = localStorage.getItem('selected_listing_id');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    function isDateRangeOverlap(start1, end1, start2, end2) {
+      return !(new Date(end1) < new Date(start2) || new Date(start1) > new Date(end2));
+    }
+
+    function renderListingDetails() {
+      const listing = amsterdam.find(l => l.listing_id === listingId);
+      if (!listing) {
+        document.getElementById('details').textContent = 'Listing not found.';
+        return;
+      }
+      document.getElementById('details').innerHTML = `
+        <h3>${listing.name}</h3>
+        <img src="${listing.picture_url}" alt="${listing.name}" width="200"/><br/>
+        <p><strong>Description:</strong> ${listing.description}</p>
+        <p><strong>Price:</strong> ${listing.price}</p>
+        <p><strong>Neighborhood:</strong> ${listing.neighbourhood}</p>
+      `;
+    }
+
+    function bookListing() {
+      const start = document.getElementById("startDate").value;
+      const end = document.getElementById("endDate").value;
+      if (!start || !end) return alert("Please select valid dates.");
+
+      const allBookings = Object.keys(localStorage)
+        .filter(k => k.endsWith("_bookings"))
+        .flatMap(k => JSON.parse(localStorage.getItem(k)))
+        .filter(b => b.listingId === listingId);
+
+      const conflict = allBookings.some(b => isDateRangeOverlap(start, end, b.startDate, b.endDate));
+
+      const statusDiv = document.getElementById("bookingStatus");
+
+      if (conflict) {
+        statusDiv.textContent = "⚠️ Selected dates are unavailable.";
+        statusDiv.style.color = "red";
+      } else {
+        const newBooking = { listingId, startDate: start, endDate: end };
+        const key = `${currentUser.username}_bookings`;
+        const userBookings = JSON.parse(localStorage.getItem(key)) || [];
+        userBookings.push(newBooking);
+        localStorage.setItem(key, JSON.stringify(userBookings));
+
+        statusDiv.textContent = "✅ Booking confirmed!";
+        statusDiv.style.color = "green";
+      }
+    }
+
+    renderListingDetails();
