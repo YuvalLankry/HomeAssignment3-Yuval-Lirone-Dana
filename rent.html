@@ -6,59 +6,7 @@
   <title>Rent Listing</title>
   <link rel="stylesheet" href="css/rent.css" />
   <script src="js/data/amsterdam.js"></script>
-  <style>
-    section { border: 1px solid #a39d9d; margin: 12px; padding: 12px; border-radius: 7px; }
-    label { display: block; margin-top: 10px; }
-    input { width: 100%; padding: 8px; margin-top: 4px; }
-    button { margin-top: 15px; padding: 10px 20px; }
-  </style>
 </head>
 <body>
-
-<!-- 
-Before navigating to rent.html, ensure you set the selected listing ID like this:
-localStorage.setItem('selected_listing_id', '<listing_id>');
-  
- example
- localStorage.setItem('selected_listing_id', '2818'); 
--->
-
-
-  <h1>Rent Listing</h1>
-
-  <section id="listingDetails">
-    <h2>Listing Information</h2>
-    <div id="details"></div>
-  </section>
-
-  <section>
-    <h2>Payment Information</h2>
-    <form id="paymentForm">
-      <label>Credit Card Number
-        <input type="text" id="cardNumber" pattern="\\d+" required />
-      </label>
-      <label>Card Holder Name
-        <input type="text" id="cardName" pattern="[A-Za-z ]+" required />
-      </label>
-      <label>Expiration Date
-        <input type="date" id="cardExpiry" required />
-      </label>
-      <label>CVV
-        <input type="text" id="cardCVV" pattern="\\d{3}" maxlength="3" required />
-      </label>
-    </form>
-  </section>
-
-  <section>
-    <h2>Booking Dates</h2>
-    <label>Start Date:
-      <input type="date" id="startDate" required />
-    </label>
-    <label>End Date:
-      <input type="date" id="endDate" required />
-    </label>
-    <button onclick="bookListing()">Check Availability & Book</button>
-    <div id="bookingStatus"></div>
-  </section>
 </body>
 </html>
