@@ -45,6 +45,7 @@ const App = {
     darkModeMobile.addEventListener("click", () => document.body.classList.toggle("dark-mode"));
   }
   },
+  
 
   loadUser() {
     const user = localStorage.getItem("currentUser");

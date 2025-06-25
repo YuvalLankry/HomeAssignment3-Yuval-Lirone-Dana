@@ -9,6 +9,7 @@
   position: relative;
 }
 
+
 .hero-section::after {
   content: "";
   position: absolute;
