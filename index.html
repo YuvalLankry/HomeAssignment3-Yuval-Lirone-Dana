@@ -1,15 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link rel="icon" href="images/icon.ico" type="image/x-icon" />
-    <script src="js/data/amsterdam.js" defer></script>
-    <link rel="stylesheet" href="css/home.css" />
-    <script>
-      console.log(amsterdam);
-    </script>
-  </head>
-  <body></body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amster'dream</title>
+  <link rel="icon" href="images/icon.ico" type="image/x-icon" alt="Icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/home.css" />
+
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="nav-left" id="userNameDisplay">User Name</div>
+
+      <div class="nav-center">
+        <a href="index.html">Home</a>
+        <a href="mybookings.html">My Booking</a>
+        <a href="favorites.html">My Favorite</a>
+      </div>
+
+      <div class="nav-right">
+
+      <button id="darkToggle" class="dark-toggle"> <i class="fas fa-sun"></i> 
+        <i class="fas fa-sun" style="display: none;"></i>   </button>
+      <button id="signOutBtn">Sign Out</button>
+
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">☰</div>
+      </div>
+      
+
+
+
+      <!-- רק במסך מובייל -->
+       
+    <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="favorites.html">My Favorite</a>
+    <a href="mybookings.html">My Booking</a>
+
+    <div class="mobile-bottom-row">
+
+      <button id="darkToggleMobile">
+      <i class="fas fa-sun"></i>
+      </button>
+      <button id="signOutBtnMobile">Sign Out</button>
+    </div>
+  </div>
+    </nav>
+  </header>
+
+
+ <section class="hero-section">
+  <div class="hero-text">
+    <h1>Your Amsterdam stay starts here.</h1>
+    <h3>With our site, find the right place and turn your trip into an Amster’dream.</h3>
+  </div>
+</section>
+
+  <section class="summary-boxes">
+    <div class="summary-box">Location: Amsterdam</div>
+
+    <div class="summary-box">Average Price: $223.43</div>
+
+    <div class="summary-box">Average Rating: 4.74</div>
+
+    <div class="summary-box">Total Apartment: 99</div>
+  </section>
+
+  <section class="filter-bar">
+     <div class="filter-group">
+  <label for="numRooms">Num Rooms</label>
+  <select id="numRooms">
+    <option value="">Any</option>
+    <option value="1">1 room</option>
+    <option value="2">2 rooms</option>
+    <option value="3">3 rooms</option>
+    <option value="4">4 rooms</option>
+    <option value="5">5 rooms</option>
+  </select>
+</div>
+    <div class="filter-group">
+      <label for="minPrice">Price Min</label>
+      <input type="number" id="minPrice" placeholder="Min" />
+    </div>
+    <div class="filter-group">
+      <label for="maxPrice">Price Max</label>
+      <input type="number" id="maxPrice" placeholder="Max" />
+    </div>
+    <div class="filter-group">
+      <label for="minRating"> <i class="fa fa-star-half-o" aria-hidden="true"></i> Rating</label> 
+      <input type="number" id="minRating" min="0" max="5" step="0.1" placeholder="e.g. 4.5" />
+    </div>
+
+    <button id="filterBtn" class="primary-btn">Filter</button>
+
+    <button id="clearFiltersBtn" class="secondary-btn">Clear Filters</button>
+  </section>
+
+  <h2 id="resultsCount"></h2>
+
+  <section id="listing-grid"></section>
+
+  <footer>
+    <p>© 2025 Lirone & Yuval & Dana . All rights reserved.</p>
+  </footer>
+
+
+  <script src="js/data/amsterdam.js" defer></script>
+  <script src="js/listing.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/favorite.js" defer></script>
+</body>
 </html>
