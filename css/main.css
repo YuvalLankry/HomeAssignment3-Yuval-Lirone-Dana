@@ -1,0 +1,144 @@
+:root {
+    --bg-color: #f3690041;
+    --text-color: #1a1a1a;
+    --accent-color: #7f4200;
+    --header-bg: #7e360094;
+    --apartment-card-bg: #a756006d;
+  }
+  
+  body.dark-mode {
+    --bg-color: #00314ca8;
+    --text-color: #f0f0f0;
+    --accent-color: #00aaff;
+    --header-bg: #001d40;
+    --apartment-card-bg: #00314ce4;
+  }
+
+  html {
+  overflow-x: hidden;
+}
+
+  * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+.navbar {
+  background-color: var(--header-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  color: var(--accent-color);
+  text-decoration: none;
+  padding: 6px 12px;
+  transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+  background-color: #7f420067;
+  border-radius: 6px;
+}
+
+.nav-right button,
+#signOutBtn,
+#darkToggle,
+#signOutBtnMobile,
+#darkToggleMobile {
+  padding: 6px 10px;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: var(--header-bg);
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  top: 60px;
+  left: 0;
+  z-index: 10;
+}
+
+.mobile-menu a {
+  color: var(--text-color);
+  padding: 12px 0;
+  font-size: 16px;
+}
+
+.mobile-menu.active {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-menu .mobile-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: var(--header-bg);
+  border-top: 1px solid var(--accent-color);
+}
+
+@media (max-width: 767px)
+{
+   .nav-center,
+  .nav-right button:not(.hamburger),
+  #signOutBtn,
+  #darkToggle {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: none !important;
+  }
+}
