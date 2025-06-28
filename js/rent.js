@@ -28,57 +28,115 @@ function checkAvailability(listingId, startDate, endDate) {
   //      - שימוש ב-isDateRangeOverlap להשוואה בין טווחים
   // להחזיר false אם יש חפיפה, true אם פנוי
 }
-
-
-    const listingId = localStorage.getItem('selected_listing_id');
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    function isDateRangeOverlap(start1, end1, start2, end2) {
-      return !(new Date(end1) < new Date(start2) || new Date(start1) > new Date(end2));
-    }
-
-    function renderListingDetails() {
-      const listing = amsterdam.find(l => l.listing_id === listingId);
-      if (!listing) {
-        document.getElementById('details').textContent = 'Listing not found.';
-        return;
+// Helper to parse ?listingId=... from the URL
+function getQueryVariable(variable) {
+  const query = window.location.search.substring(1);
+  const vars = query.split("&");
+  for (let i = 0; i < vars.length; i++) {
+      const pair = vars[i].split("=");
+      if (decodeURIComponent(pair[0]) == variable) {
+          return decodeURIComponent(pair[1]);
       }
-      document.getElementById('details').innerHTML = `
-        <h3>${listing.name}</h3>
-        <img src="${listing.picture_url}" alt="${listing.name}" width="200"/><br/>
-        <p><strong>Description:</strong> ${listing.description}</p>
-        <p><strong>Price:</strong> ${listing.price}</p>
-        <p><strong>Neighborhood:</strong> ${listing.neighbourhood}</p>
-      `;
-    }
+  }
+  return null;
+}
 
-    function bookListing() {
-      const start = document.getElementById("startDate").value;
-      const end = document.getElementById("endDate").value;
-      if (!start || !end) return alert("Please select valid dates.");
+const listingId = getQueryVariable("listingId");
+//const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-      const allBookings = Object.keys(localStorage)
-        .filter(k => k.endsWith("_bookings"))
-        .flatMap(k => JSON.parse(localStorage.getItem(k)))
-        .filter(b => b.listingId === listingId);
+// Helper to check if two date ranges overlap
+// function isDateRangeOverlap(start1, end1, start2, end2) {
+//   return !(new Date(end1) < new Date(start2) || new Date(start1) > new Date(end2));
+// }
 
-      const conflict = allBookings.some(b => isDateRangeOverlap(start, end, b.startDate, b.endDate));
+function renderListingDetails() {
+  if (!listingId) {
+      document.getElementById('details').textContent = 'No listing ID provided.';
+      return;
+  }
 
-      const statusDiv = document.getElementById("bookingStatus");
+  // support global window.amsterdam or just amsterdam
+  const listings = window.amsterdam || amsterdam;
+  const listing = listings.find(l => l.listing_id == listingId);
 
-      if (conflict) {
-        statusDiv.textContent = "⚠️ Selected dates are unavailable.";
-        statusDiv.style.color = "red";
-      } else {
-        const newBooking = { listingId, startDate: start, endDate: end };
-        const key = `${currentUser.username}_bookings`;
-        const userBookings = JSON.parse(localStorage.getItem(key)) || [];
-        userBookings.push(newBooking);
-        localStorage.setItem(key, JSON.stringify(userBookings));
+  if (!listing) {
+      document.getElementById('details').textContent = 'Listing not found.';
+      return;
+  }
 
-        statusDiv.textContent = "✅ Booking confirmed!";
-        statusDiv.style.color = "green";
+  document.getElementById('details').innerHTML = `
+      <h3>${listing.name}</h3>
+      <img src="${listing.picture_url}" alt="${listing.name}" width="200"/><br/>
+      <p><strong>Description:</strong> ${listing.description}</p>
+      <p><strong>Price:</strong> ${listing.price}</p>
+      <p><strong>Neighborhood:</strong> ${listing.neighbourhood}</p>
+  `;
+}
+
+function bookListing() {
+  window.alert("hello")
+  const start = document.getElementById("startDate").value;
+  const end = document.getElementById("endDate").value;
+  if (!start || !end) return alert("Please select valid dates.");
+
+    const today = new Date().toISOString().split('T')[0];
+
+
+  if (start < today) {
+      return alert("Start date cannot be before today.");
+  }
+
+  if (end < start) {
+      return alert("End date cannot be before start date.");
+  }
+
+  
+
+
+  const allBookings = Object.keys(localStorage)
+     .filter(k => k.endsWith("_bookings"))
+     .flatMap(k => JSON.parse(localStorage.getItem(k)))
+     .filter(b => b.listingId == listingId);
+
+  //currentUser = Object.keys(localStorage)
+  currentUser = localStorage.getItem('currentUser');
+
+  let conflict = false
+  if (allBookings.length > 0)
+  {
+    for(let i = 0; i < allBookings.length; i++)
+    {
+      if(isDateRangeOverlap(start, end, allBookings[i].startDate, allBookings[i].endDate))
+      {
+        conflict = true; 
+        break;
       }
     }
+   //   conflict = allBookings.some(b => isDateRangeOverlap(start, end, b.startDate, b.endDate))
+  }
+      
+  const statusDiv = document.getElementById("bookingStatus");
 
-    renderListingDetails();
+  window.alert(conflict)
+
+  if (conflict) {
+      statusDiv.textContent = "⚠️ Selected dates are unavailable.";
+      statusDiv.style.color = "red";
+  } else {
+      const newBooking = { listingId, startDate: start, endDate: end };
+      const key = `${currentUser.username}_bookings`;
+      const userBookings = JSON.parse(localStorage.getItem(key)) || [];
+      userBookings.push(newBooking);
+      localStorage.setItem(key, JSON.stringify(userBookings));
+
+      window.alert("no conflict")
+
+      statusDiv.textContent = "✅ Booking confirmed!";
+      statusDiv.style.color = "green";
+  }
+  }
+
+
+
+// Render details on page load
+renderListingDetails();
