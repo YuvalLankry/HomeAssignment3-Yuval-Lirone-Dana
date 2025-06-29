@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rent Listing</title>
+    <link rel="icon" href="images/icon.ico" type="image/x-icon" alt="Icon" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/rent.css" />
   <script src="js/data/amsterdam.js"></script>
   <script src="js/rent.js"></script>
@@ -16,13 +19,45 @@
 </head>
 <body>
 
-<!-- 
-Before navigating to rent.html, ensure you set the selected listing ID like this:
-localStorage.setItem('selected_listing_id', '<listing_id>');
-  
- example
- localStorage.setItem('selected_listing_id', '2818'); 
--->
+   <header>
+    <nav class="navbar">
+      <div class="nav-left" id="userNameDisplay">User Name</div>
+
+      <div class="nav-center">
+        <a href="index.html">Home</a>
+        <a href="mybookings.html">My Booking</a>
+        <a href="favorites.html">My Favorite</a>
+      </div>
+
+      <div class="nav-right">
+
+      <button id="darkToggle" class="dark-toggle"> <i class="fas fa-sun"></i> 
+        <i class="fas fa-sun" style="display: none;"></i>   </button>
+      <button id="signOutBtn">Sign Out</button>
+
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">☰</div>
+      </div>
+      
+
+
+
+      <!-- רק במסך מובייל -->
+       
+    <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="favorites.html">My Favorite</a>
+    <a href="mybookings.html">My Booking</a>
+
+    <div class="mobile-bottom-row">
+
+      <button id="darkToggleMobile">
+      <i class="fas fa-sun"></i>
+      </button>
+      <button id="signOutBtnMobile">Sign Out</button>
+    </div>
+  </div>
+    </nav>
+  </header>
 
 
   <h1>Rent Listing</h1>
@@ -65,5 +100,10 @@ localStorage.setItem('selected_listing_id', '<listing_id>');
     <button onclick="bookListing()">Check Availability & Book</button>
     <div id="bookingStatus"></div>
   </section>
+
+    <footer>
+    <p>© 2025 Lirone & Yuval & Dana . All rights reserved.</p>
+  </footer>
+  
 </body>
 </html>

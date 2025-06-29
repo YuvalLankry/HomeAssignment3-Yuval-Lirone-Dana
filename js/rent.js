@@ -42,12 +42,6 @@ function getQueryVariable(variable) {
 }
 
 const listingId = getQueryVariable("listingId");
-//const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-// Helper to check if two date ranges overlap
-// function isDateRangeOverlap(start1, end1, start2, end2) {
-//   return !(new Date(end1) < new Date(start2) || new Date(start1) > new Date(end2));
-// }
 
 function renderListingDetails() {
   if (!listingId) {
@@ -74,7 +68,6 @@ function renderListingDetails() {
 }
 
 function bookListing() {
-  window.alert("hello")
   const start = document.getElementById("startDate").value;
   const end = document.getElementById("endDate").value;
   if (!start || !end) return alert("Please select valid dates.");
@@ -98,7 +91,6 @@ function bookListing() {
      .flatMap(k => JSON.parse(localStorage.getItem(k)))
      .filter(b => b.listingId == listingId);
 
-  //currentUser = Object.keys(localStorage)
   currentUser = localStorage.getItem('currentUser');
 
   let conflict = false
@@ -112,12 +104,10 @@ function bookListing() {
         break;
       }
     }
-   //   conflict = allBookings.some(b => isDateRangeOverlap(start, end, b.startDate, b.endDate))
   }
       
   const statusDiv = document.getElementById("bookingStatus");
 
-  window.alert(conflict)
 
   if (conflict) {
       statusDiv.textContent = "⚠️ Selected dates are unavailable.";
@@ -129,7 +119,6 @@ function bookListing() {
       userBookings.push(newBooking);
       localStorage.setItem(key, JSON.stringify(userBookings));
 
-      window.alert("no conflict")
 
       statusDiv.textContent = "✅ Booking confirmed!";
       statusDiv.style.color = "green";
@@ -137,6 +126,4 @@ function bookListing() {
   }
 
 
-
-// Render details on page load
 renderListingDetails();
