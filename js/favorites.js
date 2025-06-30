@@ -24,7 +24,7 @@ function getQueryVariable(variable) {
       let found = false;
       for(var i = 0; i < userFavorites.length; i++)
       {
-        if(favID = userFavorites[i])
+        if(favID === userFavorites[i])
         {found = true;
           break;
         }
@@ -74,14 +74,36 @@ function getQueryVariable(variable) {
     // Delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete Selected Favorite";
-    deleteBtn.onclick = () => {
-      const index = parseInt(select.id);
-      favoritesList.splice(index, 1);
-      localStorage.setItem(favoritesKey, JSON.stringify(favoritesList));
-      location.reload(); // refresh to update UI
-    };
+deleteBtn.onclick = () => {
+  const index = select.selectedIndex;
+
+  if (index >= 0 && index < favoritesList.length) {
+    favoritesList.splice(index, 1);
+    localStorage.setItem(favoritesKey, JSON.stringify(favoritesList));
+
+    // Instead of reloading, rebuild the container dynamically
+    location.reload();  // Optional fallback
+  }
+};
+
     container.appendChild(deleteBtn);
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+  const darkToggle = document.getElementById("darkToggle");
+  if (darkToggle) {
+    darkToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    });
+  }
+
+  // Load dark mode state if previously enabled
+  if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode");
+  }
+});
+
 
   document.body.appendChild(container);
 });
