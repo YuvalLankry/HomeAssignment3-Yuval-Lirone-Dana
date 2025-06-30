@@ -1,31 +1,40 @@
+:root {
+  --bg-color: #f3690041;
+  --text-color: #1a1a1a;
+  --accent-color: #7f4200;
+  --header-bg: #7e360094;
+  --apartment-card-bg: #a756006d;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
   padding: 20px;
-  color: #a1a089;
+  overflow-x: hidden;
 }
 
 h1 {
   text-align: center;
   margin-bottom: 30px;
-  color: #807357;
+  color: var(--accent-color);
 }
 
 section {
-  background: #fff;
-  border: 1px solid #b9b9b0;
-  border-radius: 8px;
+  background-color: var(--apartment-card-bg);
+  border-radius: 12px;
   padding: 20px;
   margin-bottom: 25px;
-  box-shadow: 0 2px 4px rgba(31, 28, 28, 0.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   margin-top: 0;
-  color: #353012;
-  border-bottom: 1px solid #55524b;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--accent-color);
   padding-bottom: 10px;
+  font-size: 20px;
 }
 
 label {
@@ -39,33 +48,76 @@ input[type="date"] {
   width: 100%;
   padding: 10px;
   margin-top: 6px;
-  border: 1px solid #c5c4bf;
-  border-radius: 4px;
+  border: 1px solid var(--accent-color);
+  border-radius: 6px;
+  background-color: #fff;
+  color: var(--text-color);
   box-sizing: border-box;
 }
 
 button {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #bfc47e;
-  color: rgb(36, 31, 6);
-  border: none;
-  border-radius: 4px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 button:hover {
-  background-color: #afcf8b;
+  background-color: #7f420085;
 }
 
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 6px;
+  border-radius: 8px;
   margin-bottom: 10px;
 }
 
 #bookingStatus {
   margin-top: 15px;
   font-weight: bold;
+}
+
+
+body.dark-mode {
+  --bg-color: #00314ca8;
+  --text-color: #f0f0f0;
+  --accent-color: #00aaff;
+  --header-bg: #001d40;
+  --apartment-card-bg: #00314ce4;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.dark-mode section {
+  background-color: var(--apartment-card-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode h1,
+body.dark-mode h2 {
+  color: var(--text-color);
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="date"] {
+  background-color: #001f33;
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+}
+
+body.dark-mode button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+}
+
+body.dark-mode button:hover {
+  background-color: #005f88;
 }
