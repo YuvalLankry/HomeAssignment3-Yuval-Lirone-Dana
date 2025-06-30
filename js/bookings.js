@@ -7,13 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
     bookingListDiv.textContent = "No bookings found.";
     return;
   }
+  const allBookings = Object.keys(localStorage)
+  .filter(k => k.endsWith(bookingsKey))
 
-  const bookings = JSON.parse(localStorage.getItem(bookingsKey)) || [];
+
   const now = new Date();
   const futureBookings = [];
 
   const list = document.createElement("ul");
-  bookings.forEach((booking, index) => {
+  allBookings.forEach((booking, index) => {
     const bookingDate = new Date(booking.date); // assume booking.date is ISO string
     const isFuture = bookingDate > now;
 

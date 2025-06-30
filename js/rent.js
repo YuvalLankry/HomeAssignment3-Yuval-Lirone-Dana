@@ -114,7 +114,7 @@ function bookListing() {
       statusDiv.style.color = "red";
   } else {
       const newBooking = { listingId, startDate: start, endDate: end };
-      const key = `${currentUser.username}_bookings`;
+      const key = `${currentUser}_bookings`;
       const userBookings = JSON.parse(localStorage.getItem(key)) || [];
       userBookings.push(newBooking);
       localStorage.setItem(key, JSON.stringify(userBookings));
