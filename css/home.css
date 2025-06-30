@@ -86,7 +86,7 @@
   min-width: 180px;
 }
 .filter-group select {
-  padding: 9.5px;
+  padding: 9.5px; 
   border-radius: 6px;
   border: 1px solid var(--accent-color);
   min-width: 180px;

@@ -45,7 +45,6 @@ const App = {
     darkModeMobile.addEventListener("click", () => document.body.classList.toggle("dark-mode"));
   }
   },
-  
 
   loadUser() {
     const user = localStorage.getItem("currentUser");
@@ -92,7 +91,7 @@ const App = {
         <p>Price: ${a.price} | Rating: ${a.rating || a.review_scores_rating}</p>
         <a href="${a.listing_url}" target="_blank">View Listing</a>
         <div class="card-btn"> 
-        <button class="favorite-btn">Favorite</button>
+       <button class="favorite-btn" onclick="location.href='favorites.html?listingId=${a.listing_id}'">Favorite</button>
         <button onclick="location.href='rent.html?listingId=${a.listing_id}'">Rent</button>
         </div>
       `;
