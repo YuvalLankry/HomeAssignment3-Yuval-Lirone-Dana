@@ -105,7 +105,9 @@ deleteBtn.onclick = () => {
 });
 
 
-  document.body.appendChild(container);
+const contentDiv = document.getElementById("favoritesContent");
+if (contentDiv) contentDiv.appendChild(container);
+
 });
 
 
