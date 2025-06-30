@@ -125,5 +125,11 @@ function bookListing() {
   }
   }
 
+    function loadUser() {
+    const user = localStorage.getItem("currentUser");
+    if (user) {
+      document.getElementById("userNameDisplay").textContent = user;
+    }
+  }
 
 renderListingDetails();

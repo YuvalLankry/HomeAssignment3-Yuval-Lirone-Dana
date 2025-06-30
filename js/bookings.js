@@ -7,20 +7,20 @@ document.addEventListener("DOMContentLoaded", function () {
     bookingListDiv.textContent = "No bookings found.";
     return;
   }
-  const allBookings = Object.keys(localStorage)
-  .filter(k => k.endsWith(bookingsKey))
+  const userBookings = JSON.parse(localStorage.getItem(bookingsKey)) || [];
+  //.filter(k => k.endsWith(bookingsKey))
 
 
   const now = new Date();
   const futureBookings = [];
 
   const list = document.createElement("ul");
-  allBookings.forEach((booking, index) => {
-    const bookingDate = new Date(booking.date); // assume booking.date is ISO string
+  userBookings.forEach((booking, index) => {
+    const bookingDate = new Date(booking.startDate); 
     const isFuture = bookingDate > now;
 
     const listItem = document.createElement("li");
-    listItem.textContent = `Booking ${index + 1}: ${booking.listingName} on ${booking.date} - ${isFuture ? "Future" : "Past"}`;
+    listItem.textContent = `Booking ${index + 1}: ${booking.listingId} on ${booking.startDate} - ${isFuture ? "Future" : "Past"}`;
     list.appendChild(listItem);
 
     if (isFuture) {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     futureBookings.forEach((booking, idx) => {
       const option = document.createElement("option");
       option.value = booking.index;
-      option.textContent = `Booking ${booking.index + 1}: ${booking.listingName} on ${booking.date}`;
+      option.textContent = `Booking ${booking.index + 1}: ${booking.listingId} on ${booking.startDate}`;
       select.appendChild(option);
     });
 
@@ -45,8 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteBtn.textContent = "Delete Selected Future Booking";
     deleteBtn.onclick = () => {
       const selectedIndex = parseInt(select.value);
-      bookings.splice(selectedIndex, 1);
-      localStorage.setItem(bookingsKey, JSON.stringify(bookings));
+      userBookings.splice(selectedIndex, 1);
+      localStorage.setItem(bookingsKey, JSON.stringify(userBookings));
       location.reload(); // Refresh the page to reflect the changes
     };
 
@@ -59,3 +59,5 @@ document.addEventListener("DOMContentLoaded", function () {
     bookingListDiv.appendChild(noFutureMsg);
   }
 });
+
+
