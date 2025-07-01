@@ -132,10 +132,21 @@ function bookListing() {
     }
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
+
   const darkToggle = document.getElementById("darkToggle");
+  const darkToggleMobile = document.getElementById("darkToggleMobile");
+
+
   if (darkToggle) {
     darkToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    });
+  }
+
+   if (darkToggleMobile) {
+    darkToggleMobile.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
       localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
     });

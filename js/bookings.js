@@ -62,6 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const darkToggle = document.getElementById("darkToggle");
+  const darkToggleMobile = document.getElementById("darkToggleMobile");
+
   if (darkToggle) {
     darkToggle.addEventListener("click", () => {
       document.body.classList.toggle("darkToggle");
@@ -69,11 +71,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Load dark mode state if previously enabled
+  if (darkToggleMobile) {
+    darkToggleMobile.addEventListener("click", () => {
+      document.body.classList.toggle("darkToggleMobile");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    });
+  }
+
+    // Load dark mode state if previously enabled
   if (localStorage.getItem("darkMode") === "true") {
-    document.body.classList.add("darkToggle");
+    document.body.classList.add("dark-mode");
   }
 });
+
 
 
 
