@@ -1,23 +1,33 @@
+:root {
+  --bg-color: #f3690041;
+  --text-color: #1a1a1a;
+  --accent-color: #7f4200;
+  --header-bg: #7e360094;
+  --apartment-card-bg: #a756006d;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
   padding: 20px;
-  color: #333;
+  overflow-x: hidden;
 }
 
 h1 {
   text-align: center;
-  color: #2c3e50;
+  color: var(--accent-color);
+  margin-bottom: 20px;
 }
 
 #bookingList {
   max-width: 700px;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: var(--apartment-card-bg);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 ul {
@@ -26,10 +36,10 @@ ul {
 }
 
 li {
-  background-color: #ecf0f1;
+  background-color: #ffffffcc;
   margin-bottom: 10px;
   padding: 12px 16px;
-  border-left: 6px solid #3498db;
+  border-left: 6px solid var(--accent-color);
   border-radius: 8px;
 }
 
@@ -39,7 +49,7 @@ select {
   margin-top: 15px;
   margin-bottom: 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--accent-color);
   font-size: 16px;
 }
 
@@ -47,20 +57,65 @@ button {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #e74c3c;
-  color: white;
-  border: none;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
   border-radius: 6px;
-  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #c0392b;
+  background-color: #7f420085;
 }
 
 p {
   text-align: center;
-  color: #777;
+  color: var(--text-color);
+  font-style: italic;
+  margin-top: 20px;
+}
+
+body.dark-mode {
+  --bg-color: #00314ca8;
+  --text-color: #f0f0f0;
+  --accent-color: #00aaff;
+  --header-bg: #001d40;
+  --apartment-card-bg: #00314ce4;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.dark-mode h1,
+body.dark-mode p {
+  color: var(--text-color);
+}
+
+body.dark-mode #bookingList {
+  background-color: var(--apartment-card-bg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode li {
+  background-color: #001f33;
+  border-left: 6px solid var(--accent-color);
+  color: var(--text-color);
+}
+
+body.dark-mode select {
+  background-color: #001f33;
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+}
+
+body.dark-mode button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--accent-color);
+}
+
+body.dark-mode button:hover {
+  background-color: #005f88;
 }
